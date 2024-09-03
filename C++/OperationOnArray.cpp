@@ -92,12 +92,14 @@ int main() {
             cout << "Enter the element to insert: ";
             cin >> element;
             array.insert(element);
+            array.display();
             break;
 
         case 2:
             cout << "Enter the element to delete: ";
             cin >> element;
             array.deleteElement(element);
+            array.display();
             break;
 
         case 3:
