@@ -24,18 +24,12 @@ private:
 
 public:
     // Constructor to initialize book details and allocate memory using new operator
-    Books(const char* a, const char* t, const char* p, float pr, int s) {
-        author = new char[strlen(a) + 1];
-        strcpy(author, a);
-
-        title = new char[strlen(t) + 1];
-        strcpy(title, t);
-
-        publisher = new char[strlen(p) + 1];
-        strcpy(publisher, p);
-
-        price = pr;
-        stock = s;
+    Books() {
+        author = nullptr;
+        title = nullptr;
+        publisher = nullptr;
+        price = 0.0;
+        stock = 0;
     }
 
     // Destructor to free dynamically allocated memory
@@ -43,6 +37,33 @@ public:
         delete[] author;
         delete[] title;
         delete[] publisher;
+    }
+
+    // Function to input book details
+    void inputBookDetails() {
+        char temp[100];
+
+        cout << "Enter Author Name: ";
+        cin.ignore();
+        cin.getline(temp, 100);
+        author = new char[strlen(temp) + 1];
+        strcpy(author, temp);
+
+        cout << "Enter Book Title: ";
+        cin.getline(temp, 100);
+        title = new char[strlen(temp) + 1];
+        strcpy(title, temp);
+
+        cout << "Enter Publisher Name: ";
+        cin.getline(temp, 100);
+        publisher = new char[strlen(temp) + 1];
+        strcpy(publisher, temp);
+
+        cout << "Enter Price: ";
+        cin >> price;
+
+        cout << "Enter Stock: ";
+        cin >> stock;
     }
 
     // Function to display book details
@@ -71,36 +92,71 @@ public:
     }
 };
 
-int main() {
-    // Creating an array of books with dynamic memory allocation
-    Books book1("J.K. Rowling", "Harry Potter", "Bloomsbury", 39.99, 50);
-    Books book2("George Orwell", "1984", "Secker & Warburg", 19.99, 30);
-    
-    // Input from the customer
-    char searchTitle[50], searchAuthor[50];
-    cout << "Enter the title of the book: ";
-    cin.getline(searchTitle, 50);
-    cout << "Enter the author of the book: ";
-    cin.getline(searchAuthor, 50);
-    
-    // Searching and selling books
-    if (book1.searchBook(searchTitle, searchAuthor)) {
-        book1.showDetails();
-        int copies;
-        cout << "Enter number of copies required: ";
-        cin >> copies;
-        book1.sellBook(copies);
-    } else if (book2.searchBook(searchTitle, searchAuthor)) {
-        book2.showDetails();
-        int copies;
-        cout << "Enter number of copies required: ";
-        cin >> copies;
-        book2.sellBook(copies);
-    } else {
-        cout << "Book not available" << endl;
-    }
-    
-    return 0;
+// Menu-driven function
+void menu(Books books[], int& count) {
+    int choice;
+    do {
+        cout << "\n--- Book Shop Menu ---" << endl;
+        cout << "1. Add Book" << endl;
+        cout << "2. Search and Buy Book" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                if (count < 100) {
+                    books[count].inputBookDetails();
+                    count++;
+                    cout << "Book added successfully!" << endl;
+                } else {
+                    cout << "Inventory full, cannot add more books!" << endl;
+                }
+                break;
+            }
+
+            case 2: {
+                char searchTitle[50], searchAuthor[50];
+                cout << "Enter the title of the book: ";
+                cin.ignore();
+                cin.getline(searchTitle, 50);
+                cout << "Enter the author of the book: ";
+                cin.getline(searchAuthor, 50);
+
+                bool found = false;
+                for (int i = 0; i < count; i++) {
+                    if (books[i].searchBook(searchTitle, searchAuthor)) {
+                        books[i].showDetails();
+                        int copies;
+                        cout << "Enter number of copies required: ";
+                        cin >> copies;
+                        books[i].sellBook(copies);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    cout << "Book not available" << endl;
+                }
+                break;
+            }
+
+            case 3:
+                cout << "Exiting..." << endl;
+                break;
+
+            default:
+                cout << "Invalid choice! Please try again." << endl;
+                break;
+        }
+    } while (choice != 3);
 }
 
+int main() {
+    Books books[100];  // Array to store up to 100 books
+    int count = 0;     // To keep track of the number of books in inventory
 
+    menu(books, count);
+
+    return 0;
+}
