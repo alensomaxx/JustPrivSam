@@ -29,7 +29,7 @@ s consists of lowercase English letters, digits, and square brackets '[]'.
 s is guaranteed to be a valid input.
 All the integers in s are in the range [1, 300].
 
-in python///'''
+'''
 
 def search(string):
     i = 0
@@ -58,4 +58,4 @@ def search(string):
     return string
 
 
-print(search("3[a]2[bc]"))  
+print(search("3[a]2[bc]10[okk]"))  
