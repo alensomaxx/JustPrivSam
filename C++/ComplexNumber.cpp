@@ -5,6 +5,7 @@ and one copy constructor.
 The class should also have a function to add two complex numbers.*/
 
 #include <iostream>
+using namespace std;
 
 class Complex {
 public:
@@ -18,9 +19,13 @@ public:
         return Complex(real + other.real, imag + other.imag);
     }
 
-    // Function to print the complex number in the format "a + bi"
+    // Function to print the complex number in the format "a + bi" or "a - bi"
     void print() const {
-        std::cout << real << " + " << imag << "i" << std::endl;
+        std::cout << real << " ";
+        if (imag >= 0)
+            std::cout << "+ " << imag << "i" << std::endl;
+        else
+            std::cout << "- " << -imag << "i" << std::endl;
     }
 
 private:
@@ -29,11 +34,30 @@ private:
 };
 
 int main() {
-    Complex c1(2, 3);
-    Complex c2(4, 5);
+    double n1, m1, n2, m2;
 
+    // Input for the first complex number
+    cout << "Enter the real and imaginary part of the first complex number: ";
+    cin >> n1 >> m1;
+
+    // Input for the second complex number
+    cout << "Enter the real and imaginary part of the second complex number: ";
+    cin >> n2 >> m2;
+
+    // Create two complex numbers
+    Complex c1(n1, m1);
+    Complex c2(n2, m2);
+
+    // Add the two complex numbers
     Complex sum = c1.add(c2);
-    sum.print(); // Output: 6 + 8i
+
+    // Display the result
+    cout << "The sum is: ";
+    sum.print();
 
     return 0;
 }
+ // 2.0 3.0
+ // 4.0 -5.0
+
+ // 6 + -2i
