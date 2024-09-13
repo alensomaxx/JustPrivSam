@@ -43,7 +43,11 @@ int main() {
             cout << j << " ";
         }
         for (int j = i - 1; j >= 1; j--) {
-            cout << j << " ";
+            if (j%2==0){
+                cout << j << " ";    
+            }else{
+                cout << "*" << " ";
+            }
         }
         cout << endl;
     }
