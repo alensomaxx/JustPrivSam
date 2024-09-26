@@ -93,6 +93,7 @@ void toBinar(int decimal){
 
 int main(){
     int inn;
+    cout<<"Enter the number which needs to be converted: ";
     cin>>inn;
     
     toBinar(inn);
