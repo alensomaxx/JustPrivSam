@@ -49,6 +49,7 @@ int main() {
         cout << "Seat is available" << endl;
     } else {
         cout << "Seat is not available" << endl;
+        cout << "Try Again later" << endl;
     }
 
     return 0;
