@@ -47,8 +47,16 @@ class Polar{
 };
 
 int main(){
-    Polar p1(3, 45);
-    Polar p2(2, 60);
+    int a , b;
+    int aa,bb;
+    cout<<"Enter the 1st radius:";cin>>a;
+    cout<<"Enter the 1st degree:";cin>>b;
+    cout<<"Enter the 2nd radius:";cin>>aa;
+    cout<<"Enter the 2nd degree:";cin>>bb;
+    
+
+    Polar p1(a, b);
+    Polar p2(aa, bb);
 
     Polar p3 = p1 + p2;
 
