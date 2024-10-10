@@ -1,15 +1,52 @@
+/*Write a program that includes two classes: one with a private member representing 
+meters and another representing feet. Implement type casting to convert feet to 
+meters using the private member of the class representing meters.*/
+
 #include <iostream>
+
 using namespace std;
 
-int main(){
-    int i;
-    float x=3.2345;
-    i=x;
-    float y;
-    y=i;
-    cout<<x<<endl<<i<<endl<<y;
+class Meters {
+private:
+    double meters;
 
+public:
+    Meters(double meters) : meters(meters) {}
 
+    double getMeters() const {
+        return meters;
+    }
+
+    double convertToFeet() const {
+        return meters * 3.28084;
+    }
+};
+
+class Feet {
+private:
+    double feet;
+
+public:
+    Feet(double feet) : feet(feet) {}
+
+    double getFeet() const {
+        return feet;
+    }
+
+    Meters convertToMeters() const {
+        return Meters(feet / 3.28084);
+    }
+};
+
+int main() {
+    Meters meters(10);
+    Feet feet(32.81);
+
+    cout << "Meters: " << meters.getMeters() << endl;
+    cout << "Feet: " << feet.getFeet() << endl;
+
+    cout << "Meters to feet: " << meters.convertToFeet() << " feet" << endl;
+    cout << "Feet to meters: " << feet.convertToMeters().getMeters() << " meters" << endl;
 
     return 0;
 }
