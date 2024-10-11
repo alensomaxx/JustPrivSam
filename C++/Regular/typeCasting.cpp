@@ -39,8 +39,13 @@ public:
 };
 
 int main() {
-    Meters meters(10);
-    Feet feet(32.81);
+    double m;
+    double f;
+    cout<<"Enter Meters: "; cin>> m;
+    cout<<"Enter Feets: "; cin>> f;
+    
+    Meters meters(m);
+    Feet feet(f);
 
     cout << "Meters: " << meters.getMeters() << endl;
     cout << "Feet: " << feet.getFeet() << endl;
