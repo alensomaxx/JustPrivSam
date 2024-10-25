@@ -83,6 +83,8 @@ int main() {
     h.insert(30);
     h.insert(40);
     h.insert(50);
+    h.insert(60);
+    
 
     cout << "Maximum value: " << h.getMax() << endl;
 
