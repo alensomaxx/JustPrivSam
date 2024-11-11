@@ -88,6 +88,8 @@ int main() {
     
     h.insert(680);
     h.insert(50);
+    
+    h.insert(689);
     h.insert(99);
     h.insert(222);
     
