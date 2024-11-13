@@ -84,6 +84,7 @@ int main() {
     h.insert(40);
     h.insert(50);
     h.insert(500);
+    h.insert(40);
     
     h.insert(680);
     h.insert(50);
