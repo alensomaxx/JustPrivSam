@@ -30,6 +30,7 @@ int main() {
     test(0);
     test(-1);
     
+    test(0);
     test(4);
     test(3);
 
