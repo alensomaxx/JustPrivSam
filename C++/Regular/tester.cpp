@@ -11,7 +11,6 @@ int main(){
     cout<<"This is just CHECK ME OUT test the Code!"<<endl;
     cout<<"This is just to test the Code!"<<endl;
     cout<<"This is just to test the Code!"<<endl;
-    cout<<"This is just CHECK ME OUT test the Code!"<<endl;
     
 
     return 0;
