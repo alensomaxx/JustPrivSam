@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 a = np.array([[1,2], [3,4],[5,6]])
 print(a)
 
-b=2*a
+b=2*a+5
 print (b)
 
 plt.plot(a[::,:1:], a[::, 1::])
