@@ -17,9 +17,9 @@ print(y.info())
 print(y.describe()) 
 
 # To plot data
-plt.bar(y['Country'], y['Score']) 
-plt.xlabel('Country')
-plt.ylabel('Happiness Score')
-plt.title('Happiness Scores by Country')
+plt.bar(y['Health Index'], y['Happiness Index']) 
+plt.xlabel('Health Index')
+plt.ylabel('Happiness Index')
+plt.title('Index Comparison')
 plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
 plt.show()
