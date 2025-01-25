@@ -17,7 +17,8 @@ print(y.info())
 print(y.describe()) 
 
 # To plot data
-plt.bar(y['Health Index'], y['Happiness Index']) 
+plt.scatter(y['Health Index'],y['Happiness Index'], color='red', marker ='x', label ='Health - Happiness')
+#plt.bar(y['Health Index'], y['Happiness Index']) 
 plt.xlabel('Health Index')
 plt.ylabel('Happiness Index')
 plt.title('Index Comparison')
