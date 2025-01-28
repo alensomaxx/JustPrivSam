@@ -16,6 +16,8 @@ print(y.info())
 #Get summary statistics 
 print(y.describe()) 
 
+
+
 # To plot data
 #plt.hist(y['Health Index'], bins=10, color='purple', edgecolor='black', label='Frequency Distribution')
 plt.scatter(y['Health Index'],y['Happiness Index'], color='red', marker ='x', label ='Health - Happiness')
