@@ -18,7 +18,6 @@ cosine_sim_u1m2 = cosine_similarity(u1,m2)
 print("Cosine Similarity of u1m1: ", cosine_sim_u1m1)
 print("Cosine Similarity of u1m2: ", cosine_sim_u1m2)
 
-print(" ")
 
 if cosine_sim_u1m1 > cosine_sim_u1m2:
     print("Watch M1")
