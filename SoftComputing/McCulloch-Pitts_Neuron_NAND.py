@@ -7,7 +7,7 @@ def mcp_nand(x1,x2):
     else:
         return 0 #doesn't fire
     
-#Testing the AND function for all combinations of inputs
+#Testing the NAND function for all combinations of inputs
 print("NAND Gate using McCulloch-Pitts Neuron:")
 print(f"Input: (0,0) -> Output: {mcp_nand(0,0)}") 
 print(f"Input: (0,1) -> Output: {mcp_nand(0,1)}")

@@ -7,7 +7,7 @@ def mcp_or(x1,x2):
     else:
         return 0 #doesn't fire
     
-#Testing the AND function for all combinations of inputs
+#Testing the OR function for all combinations of inputs
 print("OR Gate using McCulloch-Pitts Neuron:")
 print(f"Input: (0,0) -> Output: {mcp_or(0,0)}") 
 print(f"Input: (0,1) -> Output: {mcp_or(0,1)}")
