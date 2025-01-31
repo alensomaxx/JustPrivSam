@@ -1,1 +1,0 @@
-plt.hist(data, bins=10, color='purple', edgecolor='black', label='Frequency Distribution')

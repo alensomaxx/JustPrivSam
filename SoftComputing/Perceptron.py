@@ -1,6 +1,6 @@
 import numpy as np
 
-# defining the perceptron
+# defining the perceptron - means 
 def perceptron(X, y, learning_rate=0.1, epochs=10):
     weights = np.zeros(X.shape[1])  # Corrected: np.zeros
     bias = 0
