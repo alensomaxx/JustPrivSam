@@ -68,7 +68,7 @@ public:
 
     void displayBalance() const override {
         BankAccount::displayBalance();
-        std::cout << "Minimum Balance: " << minimumBalance << std::endl;
+        std::cout << "Mini Balance: " << minimumBalance << std::endl;
     }
 
 private:
