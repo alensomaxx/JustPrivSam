@@ -62,7 +62,7 @@ public:
         if (balance >= amount + minimumBalance) {
             balance -= amount;
         } else {
-            std::cout << "Insufficient funds or minimum balance requirement not met.\n";
+            std::cout << "Insufficient funds or minimum balance requirement not met\n";
         }
     }
 
