@@ -15,7 +15,6 @@ c=np.linspace(0, 2*np.pi, 100)
 print(type(c))
 print(c)
 
-print(c)
 plt.plot(c, np.sin(c))
 plt.plot(c, np.cos(c))
 
