@@ -32,7 +32,7 @@ y = np.array([0, 0, 1, 1])#Labels (0: Class A,1: Class B)
   #parameters
 n_prototypes = 2 #one prototype for each class
 learning_rate = 0.1
-n_epochs = 10
+n_epochs = 100 #after a certain point the value is becoming constant([7.52631579 1.90526316])
 
   #train the LVQ model
 prototypes = lvq(X, y, n_prototypes, learning_rate, n_epochs)
