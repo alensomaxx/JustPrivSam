@@ -30,7 +30,7 @@ X = np.array([[5,1.2],[6,1.4],[7,1.8],[8,2.0]])
 y = np.array([0, 0, 1, 1])#Labels (0: Class A,1: Class B)
 
   #parameters
-n_prototypes = 2 #one prototype for each class
+n_prototypes = 3 #one prototype for each class
 learning_rate = 0.1
 n_epochs = 100 #after a certain point the value is becoming constant([7.52631579 1.90526316])
 
