@@ -18,6 +18,6 @@ activity['high'] = fuzz.trimf(activity.universe, [0,0,3])
 
 
 age.view()
-activity.view()
+
 plt.draw()
 plt.show() 
