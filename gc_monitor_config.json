@@ -1,0 +1,6 @@
+{
+    "monitoring_interval": 1,
+    "max_history_points": 100,
+    "logging_level": "INFO",
+    "prediction_window": 10
+}
