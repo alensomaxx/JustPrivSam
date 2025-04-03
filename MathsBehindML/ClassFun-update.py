@@ -1,25 +1,10 @@
 import math
 import numpy as np
+import matplotlib.pyplot as plt
 
-def linear_regression(data_X, data_Y, learning_rate=0.01, iterations=1000, regularization='none', lambda_val=0.1, feature_scaling='none', polynomial_degree=1, train_test_split_ratio=0.8, early_stopping=False, validation_split_ratio=0.2):
+def linear_regression(data_X, data_Y, learning_rate=0.01, iterations=1000, regularization='none', lambda_val=0.1, feature_scaling='none', polynomial_degree=1, train_test_split_ratio=0.8, early_stopping=False, validation_split_ratio=0.2, plot_results=False):
     """
-    Performs linear regression with various options.
-
-    Args:
-        data_X: Input features (tuple or list).
-        data_Y: Target values (tuple or list).
-        learning_rate: Learning rate for gradient descent.
-        iterations: Number of gradient descent iterations.
-        regularization: 'none', 'l1', or 'l2'.
-        lambda_val: Regularization parameter.
-        feature_scaling: 'none', 'normalize', or 'standardize'.
-        polynomial_degree: Degree of polynomial features.
-        train_test_split_ratio: Ratio of training data.
-        early_stopping: Boolean, whether to use early stopping or not.
-        validation_split_ratio: Ratio of validation data, if early stopping enabled.
-
-    Returns:
-        A dictionary containing the model parameters and evaluation metrics.
+    Performs linear regression with various options and plotting capabilities.
     """
 
     X = np.array(data_X)
@@ -49,9 +34,9 @@ def linear_regression(data_X, data_Y, learning_rate=0.01, iterations=1000, regul
     Y_train, Y_test = Y[:split_index], Y[split_index:]
 
     if early_stopping:
-      validation_split = int(len(X_train)*(1 - validation_split_ratio))
-      X_val, X_train = X_train[validation_split:], X_train[:validation_split]
-      Y_val, Y_train = Y_train[validation_split:], Y_train[:validation_split]
+        validation_split = int(len(X_train) * (1 - validation_split_ratio))
+        X_val, X_train = X_train[validation_split:], X_train[:validation_split]
+        Y_val, Y_train = Y_train[validation_split:], Y_train[:validation_split]
 
     # Initialize weights and bias
     weights = np.zeros(X_train.shape[1])
@@ -62,10 +47,14 @@ def linear_regression(data_X, data_Y, learning_rate=0.01, iterations=1000, regul
     best_weights = weights.copy()
     best_bias = bias
     no_improvement_count = 0
+    errors = []  # For plotting the error over iterations
+    weight_history = []  # For plotting weight changes
 
     for _ in range(iterations):
         predictions = np.dot(X_train, weights) + bias
         error = predictions - Y_train
+        errors.append(np.mean(error**2))  # Save error for plotting
+        weight_history.append(weights.copy())  # Save weights
 
         # Calculate gradients
         grad_weights = (1 / len(X_train)) * np.dot(X_train.T, error)
@@ -82,19 +71,19 @@ def linear_regression(data_X, data_Y, learning_rate=0.01, iterations=1000, regul
         bias -= learning_rate * grad_bias
 
         if early_stopping:
-          val_predictions = np.dot(X_val, weights) + bias
-          val_error = np.mean((val_predictions - Y_val)**2)
-          if val_error < best_val_error:
-            best_val_error = val_error
-            best_weights = weights.copy()
-            best_bias = bias
-            no_improvement_count = 0
-          else:
-            no_improvement_count +=1
-            if no_improvement_count>10:
-              weights = best_weights.copy()
-              bias = best_bias
-              break
+            val_predictions = np.dot(X_val, weights) + bias
+            val_error = np.mean((val_predictions - Y_val) ** 2)
+            if val_error < best_val_error:
+                best_val_error = val_error
+                best_weights = weights.copy()
+                best_bias = bias
+                no_improvement_count = 0
+            else:
+                no_improvement_count += 1
+                if no_improvement_count > 10:
+                    weights = best_weights.copy()
+                    bias = best_bias
+                    break
 
     # Evaluation
     predictions_test = np.dot(X_test, weights) + bias
@@ -104,6 +93,38 @@ def linear_regression(data_X, data_Y, learning_rate=0.01, iterations=1000, regul
     ss_res = np.sum((predictions_test - Y_test) ** 2)
     ss_tot = np.sum((Y_test - np.mean(Y_test)) ** 2)
     r_squared = 1 - (ss_res / ss_tot)
+
+    if plot_results:
+        plt.figure(figsize=(18, 6))
+
+        # Plot 1: Actual vs. Predicted
+        plt.subplot(1, 3, 1)
+        plt.scatter(X_test[:, 0], Y_test, label='Actual Data')
+        plt.scatter(X_test[:, 0], predictions_test, label='Predicted Data')
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.title('Actual vs. Predicted')
+        plt.legend()
+
+        # Plot 2: Error over Iterations
+        plt.subplot(1, 3, 2)
+        plt.plot(errors)
+        plt.xlabel('Iterations')
+        plt.ylabel('Mean Squared Error')
+        plt.title('Error over Iterations')
+
+        # Plot 3: Weight Changes
+        plt.subplot(1, 3, 3)
+        for i in range(X_train.shape[1]):
+            weight_values = [w[i] for w in weight_history]
+            plt.plot(weight_values, label=f'Weight {i+1}')
+        plt.xlabel('Iterations')
+        plt.ylabel('Weight Value')
+        plt.title('Weight Changes over Iterations')
+        plt.legend()
+
+        plt.tight_layout()
+        plt.show()
 
     return {
         'weights': weights,
@@ -130,9 +151,11 @@ early_stopping_choice = input("Use early stopping? (yes/no): ").lower()
 early_stopping = early_stopping_choice == 'yes'
 validation_split_ratio = 0.2
 if early_stopping:
-  validation_split_ratio = float(input("Enter validation split ratio: "))
+    validation_split_ratio = float(input("Enter validation split ratio: "))
+plot_choice = input("Plot the results? (yes/no): ").lower()
+plot_results = plot_choice == 'yes'
 
-results = linear_regression(data_X, data_Y, learning_rate, iterations, regularization, lambda_val, feature_scaling, polynomial_degree, train_test_split_ratio, early_stopping, validation_split_ratio)
+results = linear_regression(data_X, data_Y, learning_rate, iterations, regularization, lambda_val, feature_scaling, polynomial_degree, train_test_split_ratio, early_stopping, validation_split_ratio, plot_results)
 
 print("\nResults:")
 print(f"Weights: {results['weights']}")
